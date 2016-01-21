@@ -1,0 +1,10 @@
+E:\site\kk\sys\kk_pub\trunk\kk_pub\BS.Components.Data\bin\Release\BS.Components.Data.dll
+E:\site\kk\sys\kk_pub\trunk\kk_pub\BS.Components.Data\bin\Release\BS.Components.Data.pdb
+E:\site\kk\sys\kk_pub\trunk\kk_pub\BS.Components.Data\obj\Release\BS.Components.Data.csprojResolveAssemblyReference.cache
+E:\site\kk\sys\kk_pub\trunk\kk_pub\BS.Components.Data\obj\Release\BS.Components.Data.dll
+E:\site\kk\sys\kk_pub\trunk\kk_pub\BS.Components.Data\obj\Release\BS.Components.Data.pdb
+E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\bin\Release\BS.Components.Data.dll
+E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\bin\Release\BS.Components.Data.pdb
+E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\obj\Release\BS.Components.Data.csprojResolveAssemblyReference.cache
+E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\obj\Release\BS.Components.Data.dll
+E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\obj\Release\BS.Components.Data.pdb

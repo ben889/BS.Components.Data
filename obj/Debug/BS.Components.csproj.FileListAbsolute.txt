@@ -1,0 +1,5 @@
+E:\site\唐土生\mytest\Components.EntitySQL\bin\BS.Components.dll
+E:\site\唐土生\mytest\Components.EntitySQL\bin\BS.Components.pdb
+E:\site\唐土生\mytest\Components.EntitySQL\obj\Debug\BS.Components.csprojResolveAssemblyReference.cache
+E:\site\唐土生\mytest\Components.EntitySQL\obj\Debug\BS.Components.dll
+E:\site\唐土生\mytest\Components.EntitySQL\obj\Debug\BS.Components.pdb
