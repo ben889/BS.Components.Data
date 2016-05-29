@@ -438,15 +438,22 @@ namespace BS.Components.Data.SQLProvider
             return tables[1];
         }
 
-        public DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName)
+
+        public DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName, string leftJoin)
         {
             if (!string.IsNullOrEmpty(where))
             {
                 where = " WHERE " + where;
             }
+
+            if (!string.IsNullOrEmpty(leftJoin))
+            {
+                leftJoin = " " + leftJoin;
+            }
             StringBuilder builder = new StringBuilder();
             builder.Append("SELECT COUNT(1) FROM ");
             builder.Append(tableName);
+            builder.Append(leftJoin);
             builder.Append(where);
             builder.Append(";");
             if (!string.IsNullOrEmpty(orderBy))
@@ -465,6 +472,7 @@ namespace BS.Components.Data.SQLProvider
             }
             builder.Append(" from ");
             builder.Append(tableName);
+            builder.Append(leftJoin);
             builder.Append(where);
             builder.Append(string.Concat(new object[] { ") tmp where rownum between ", (currentPage - 1) * pageSize + 1, " and ", currentPage * pageSize }));
             builder.Append(";");
@@ -474,6 +482,10 @@ namespace BS.Components.Data.SQLProvider
                 records = Convert.ToInt32(tables[0].Rows[0][0]);
             }
             return tables[1];
+        }
+        public DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName)
+        {
+            return GetTablePager(pageSize, currentPage, where, orderBy, columns, ref records, parms, tableName, null);
         }
 
         public int NonQuery(string sql)

@@ -8,3 +8,7 @@ E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\bin\Release\BS.Components.
 E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\obj\Release\BS.Components.Data.csprojResolveAssemblyReference.cache
 E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\obj\Release\BS.Components.Data.dll
 E:\site\kk\sys\kk_center\kk_center\BS.Components.Data\obj\Release\BS.Components.Data.pdb
+E:\System\github\BS.Components.Data\bin\Release\BS.Components.Data.dll
+E:\System\github\BS.Components.Data\bin\Release\BS.Components.Data.pdb
+E:\System\github\BS.Components.Data\obj\Release\BS.Components.Data.dll
+E:\System\github\BS.Components.Data\obj\Release\BS.Components.Data.pdb
