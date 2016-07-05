@@ -439,21 +439,21 @@ namespace BS.Components.Data.SQLProvider
         }
 
 
-        public DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName, string leftJoin)
+        public DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName, string Join)
         {
             if (!string.IsNullOrEmpty(where))
             {
                 where = " WHERE " + where;
             }
 
-            if (!string.IsNullOrEmpty(leftJoin))
+            if (!string.IsNullOrEmpty(Join))
             {
-                leftJoin = " " + leftJoin;
+                Join = " " + Join;
             }
             StringBuilder builder = new StringBuilder();
             builder.Append("SELECT COUNT(1) FROM ");
             builder.Append(tableName);
-            builder.Append(leftJoin);
+            builder.Append(Join);
             builder.Append(where);
             builder.Append(";");
             if (!string.IsNullOrEmpty(orderBy))
@@ -472,7 +472,7 @@ namespace BS.Components.Data.SQLProvider
             }
             builder.Append(" from ");
             builder.Append(tableName);
-            builder.Append(leftJoin);
+            builder.Append(Join);
             builder.Append(where);
             builder.Append(string.Concat(new object[] { ") tmp where rownum between ", (currentPage - 1) * pageSize + 1, " and ", currentPage * pageSize }));
             builder.Append(";");

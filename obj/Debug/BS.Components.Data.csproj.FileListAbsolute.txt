@@ -34,3 +34,7 @@ E:\System\eFrame\eFrame2.0\BS.Components.Data\bin\Debug\BS.Components.Data.dll
 E:\System\eFrame\eFrame2.0\BS.Components.Data\bin\Debug\BS.Components.Data.pdb
 E:\System\eFrame\eFrame2.0\BS.Components.Data\obj\Debug\BS.Components.Data.dll
 E:\System\eFrame\eFrame2.0\BS.Components.Data\obj\Debug\BS.Components.Data.pdb
+E:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.dll
+E:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.pdb
+E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.dll
+E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.pdb

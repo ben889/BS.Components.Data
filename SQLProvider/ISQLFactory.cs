@@ -50,7 +50,7 @@ namespace BS.Components.Data.SQLProvider
         DataTable GetTable<T>(int pageSize, string where, string orderBy, DbParameter[] parms, string customColumns) where T : class;
 
         DataTable GetTablePager<T>(int pageSize, int currentPage, string where, string orderBy, string customColumns, ref int records, DbParameter[] parms) where T : class;
-        DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName, string leftJoin);
+        DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName, string Join);
         DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName);
 
         int NonQuery(string sql);
