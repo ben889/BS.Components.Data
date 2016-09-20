@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BS.Components.Data.Util;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -19,7 +20,31 @@ namespace BS.Components.Data.Config
                 return conn;
             }
         }
-
+        /// <summary>
+        /// 方便客户端程序共用
+        /// </summary>
+        /// <returns></returns>
+        public static string getConnection()
+        {
+            try
+            {
+                string conn = "";
+                if (System.Web.HttpContext.Current != null)
+                {
+                    string key = System.Web.HttpContext.Current.Request.Url.Authority;
+                    conn = getConnectionString(key);
+                }
+                else {
+                    conn = getConnectionString("conn");
+                }
+                return conn;
+            }
+            catch (Exception exc)
+            {
+                LogHelper.writeLog(System.Environment.CurrentDirectory, "exelog_", exc.Message);
+            }
+            return "";
+        }
 
         public static string getConnectionString(string key)
         {
