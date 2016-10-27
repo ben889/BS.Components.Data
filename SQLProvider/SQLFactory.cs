@@ -504,6 +504,29 @@ namespace BS.Components.Data.SQLProvider
 
         public bool IsExist<T>(string where) where T : class
         {
+            return GetCount<T>(where) > 0;
+            //Type type = typeof(T);
+            //string tableName = EntityHelper.GetTableName(type);
+            //bool quote = false;
+            //PropertyInfo tableIdentity = EntityHelper.GetTableIdentity(type);
+            //GetDbType(tableIdentity.PropertyType, ref quote);
+            //StringBuilder builder = new StringBuilder();
+            //builder.Append("SELECT COUNT(*) FROM ");
+            //builder.Append(tableName);
+            //builder.Append(" WHERE ");
+            //builder.Append(where);
+            //int num = 0;
+            //SqlDataReader reader = SQLHelper.DataReader(this.connection, builder.ToString(), CommandType.Text, null);
+            //if (reader.Read())
+            //{
+            //    num = reader.GetInt32(0);
+            //}
+            //reader.Close();
+            //return (num > 0);
+        }
+
+        public int GetCount<T>(string where) where T : class
+        {
             Type type = typeof(T);
             string tableName = EntityHelper.GetTableName(type);
             bool quote = false;
@@ -521,7 +544,7 @@ namespace BS.Components.Data.SQLProvider
                 num = reader.GetInt32(0);
             }
             reader.Close();
-            return (num > 0);
+            return num;
         }
 
         #region 私有方法

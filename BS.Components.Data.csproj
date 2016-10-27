@@ -43,11 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\AppConfig.cs" />
-    <Compile Include="Config\ConfigManager!1.cs" />
-    <Compile Include="Config\ConfigSectionHandler.cs" />
     <Compile Include="Config\ConnConfig.cs" />
-    <Compile Include="Config\IConfigInfo.cs" />
     <Compile Include="DataProvider\FileHelper.cs" />
     <Compile Include="DataProvider\FolderHelper.cs" />
     <Compile Include="DataProvider\ImageHelper.cs" />
@@ -64,6 +60,7 @@
     <Compile Include="SQLProvider\SqlDbHelper.cs" />
     <Compile Include="SQLProvider\SQLFactory.cs" />
     <Compile Include="SQLProvider\SQLHelper.cs" />
+    <Compile Include="Util\LogHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

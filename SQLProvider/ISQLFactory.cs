@@ -57,5 +57,6 @@ namespace BS.Components.Data.SQLProvider
         int NonQuery(string sql, DbParameter[] dbparameter);
         object ExecuteScalar(string sql, DbParameter[] dbparameter);
         bool IsExist<T>(string where) where T : class;
+        int GetCount<T>(string where) where T : class;
     }
 }

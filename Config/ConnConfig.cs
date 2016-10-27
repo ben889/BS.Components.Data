@@ -41,7 +41,7 @@ namespace BS.Components.Data.Config
             }
             catch (Exception exc)
             {
-                LogHelper.writeLog(System.Environment.CurrentDirectory, "exelog_", exc.Message);
+                LogHelper.writeLog(System.Environment.CurrentDirectory, "BS_Components_log_", exc.Message);
             }
             return "";
         }
