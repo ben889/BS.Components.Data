@@ -46,6 +46,8 @@ namespace BS.Components.Data.SQLProvider
         int Delete<T>(SqlConnection sqlconnection, SqlCommand command, SqlTransaction trans, string where) where T : class;
 
         List<T> GetList<T>(int pageSize, string where, string orderBy, DbParameter[] parms, string customColumns) where T : class;
+        int GetCount<T>(string where, DbParameter[] parms) where T : class;
+
         DataTable GetTable(string sqlText, CommandType commandType, DbParameter[] parms);
         DataTable GetTable<T>(int pageSize, string where, string orderBy, DbParameter[] parms, string customColumns) where T : class;
 

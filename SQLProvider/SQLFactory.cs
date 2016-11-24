@@ -176,6 +176,21 @@ namespace BS.Components.Data.SQLProvider
             return list2;
         }
 
+        public int GetCount<T>(string where, DbParameter[] parms) where T : class
+        {
+            Type type = typeof(T);
+            string tableName = EntityHelper.GetTableName(type);
+            if (!string.IsNullOrEmpty(where))
+            {
+                where = " WHERE " + where;
+            }
+            String sqlText = "SELECT COUNT(1) FROM " + tableName;
+            if (where != null && where.Trim().Length > 0)
+                sqlText = sqlText + " WHERE " + where;
+            object obj = SQLHelper.ExecuteScalar(this.connection, sqlText.ToString(), CommandType.Text, parms);
+            return obj != null ? Convert.ToInt32(obj) : 0;
+        }
+
         public DataTable GetTable(string sqlText, CommandType commandType, DbParameter[] parms)
         {
             return SQLHelper.DataSet(this.connection, sqlText, commandType, parms).Tables[0];
