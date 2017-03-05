@@ -51,6 +51,7 @@
     <Compile Include="DataProvider\XmlHelper.cs" />
     <Compile Include="Entity\ColumnTypes.cs" />
     <Compile Include="Entity\EntityHelper.cs" />
+    <Compile Include="Entity\MyDbTypeAttribute.cs" />
     <Compile Include="Entity\ObjectCache.cs" />
     <Compile Include="Entity\PropertyAttribute.cs" />
     <Compile Include="Entity\ReturnTypes.cs" />

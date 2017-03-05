@@ -38,4 +38,3 @@ E:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.dll
 E:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.pdb
 E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.dll
 E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.pdb
-E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.csprojResolveAssemblyReference.cache

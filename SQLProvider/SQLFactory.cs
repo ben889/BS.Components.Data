@@ -1,6 +1,7 @@
 ﻿using BS.Components.Data.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -272,8 +273,29 @@ namespace BS.Components.Data.SQLProvider
             SqlParameter[] parms = new SqlParameter[count];
             for (index = 0; index < count; index++)
             {
+
+
                 property = type.GetProperty(list[index]);
-                parms[index] = new SqlParameter("@" + list[index], GetDbType(property.PropertyType, ref quote));
+
+                object dbType = null;
+                //得到每一个属性的特性类集合
+                IList<CustomAttributeData> lstAttr = property.GetCustomAttributesData();
+                foreach (var oAttr in lstAttr)
+                {
+                    //得到特性类的所有参数
+                    var lstAttrArgu = oAttr.NamedArguments;
+                    foreach (var oAttrAru in lstAttrArgu)
+                    {
+                        //取每个特性类参数的键值对
+                        //Console.WriteLine(oAttrAru.MemberInfo.Name + "=" + oAttrAru.TypedValue.Value);
+                        if (oAttrAru.MemberInfo.Name.Trim().ToLower().Equals("dbtype"))
+                        {
+                            dbType = oAttrAru.TypedValue.Value;
+                        }
+                    }
+                }
+
+                parms[index] = new SqlParameter("@" + list[index], GetDbType(property.PropertyType, dbType, ref quote));
                 parms[index].Value = property.GetValue(model, null);
             }
             return SQLHelper.NonQuery(connection, builder.ToString(), CommandType.Text, parms);
@@ -398,7 +420,6 @@ namespace BS.Components.Data.SQLProvider
         //    string sql = builder.Remove(builder.Length - 1, 1).ToString();
         //    return SQLHelper.NonQuery(this.connection, builder.ToString(), CommandType.Text, parms);
         //}
-
 
 
         public DataTable GetTablePager<T>(int pageSize, int currentPage, string where, string orderBy, string customColumns, ref int records, DbParameter[] parms) where T : class
@@ -565,6 +586,22 @@ namespace BS.Components.Data.SQLProvider
         #region 私有方法
         private static SqlDbType GetDbType(Type type, ref bool quote)
         {
+            return GetDbType(type, "", ref quote);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="dbType"></param>
+        /// <param name="quote">如果为真则为string</param>
+        /// <returns></returns>
+        private static SqlDbType GetDbType(Type type, object dbType, ref bool quote)
+        {
+            if (dbType != null)
+            {
+                if (Enum.IsDefined(typeof(SqlDbType), dbType))
+                    return (SqlDbType)Enum.ToObject(typeof(SqlDbType), dbType);
+            }
             quote = false;
             SqlDbType varChar = SqlDbType.VarChar;
             if (type.Equals(typeof(string)))
@@ -607,6 +644,53 @@ namespace BS.Components.Data.SQLProvider
                 varChar = SqlDbType.Binary;
             }
             return varChar;
+        }
+        /// <summary>
+        /// 2017-3-3新增
+        /// </summary>
+        /// <param name="dbTypeName"></param>
+        /// <param name="raise"></param>
+        /// <returns></returns>
+        private static SqlDbType ParseDbType(string dbTypeName, bool raise = true)
+        {
+            switch (dbTypeName.ToLower())
+            {
+                case "bigint": return SqlDbType.BigInt;
+                case "binary": return SqlDbType.Binary;
+                case "bit": return SqlDbType.Bit;
+                case "char": return SqlDbType.Char;
+                case "date": return SqlDbType.Date;
+                case "datetime": return SqlDbType.DateTime;
+                case "datetime2": return SqlDbType.DateTime2;
+                case "datetimeoffset": return SqlDbType.DateTimeOffset;
+                case "numeric":
+                case "decimal": return SqlDbType.Decimal;
+                case "float": return SqlDbType.Float;
+                case "image": return SqlDbType.Image;
+                case "int": return SqlDbType.Int;
+                case "money": return SqlDbType.Money;
+                case "nchar": return SqlDbType.NChar;
+                case "ntext": return SqlDbType.NText;
+                case "nvarchar": return SqlDbType.NVarChar;
+                case "real": return SqlDbType.Real;
+                case "smalldatetime": return SqlDbType.SmallDateTime;
+                case "smallint": return SqlDbType.SmallInt;
+                case "smallmoney": return SqlDbType.SmallMoney;
+                case "structured": return SqlDbType.Structured;
+                case "text": return SqlDbType.Text;
+                case "time": return SqlDbType.Time;
+                case "timestamp": return SqlDbType.Timestamp;
+                case "tinyint": return SqlDbType.TinyInt;
+                case "udt": return SqlDbType.Udt;
+                case "uniqueidentifier": return SqlDbType.UniqueIdentifier;
+                case "varbinary": return SqlDbType.VarBinary;
+                case "varchar": return SqlDbType.VarChar;
+                case "sql_variant":
+                case "variant": return SqlDbType.Variant;
+                case "xml": return SqlDbType.Xml;
+            }
+            if (raise) throw new ArgumentException("SqlDbType not found: " + dbTypeName);
+            return SqlDbType.Variant;
         }
 
         #region 添加
