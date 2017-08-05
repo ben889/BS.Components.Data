@@ -584,7 +584,7 @@ namespace BS.Components.Data.SQLProvider
         }
 
         #region 私有方法
-        private static SqlDbType GetDbType(Type type, ref bool quote)
+        public static SqlDbType GetDbType(Type type, ref bool quote)
         {
             return GetDbType(type, "", ref quote);
         }
@@ -645,53 +645,55 @@ namespace BS.Components.Data.SQLProvider
             }
             return varChar;
         }
+        #region 
         /// <summary>
         /// 2017-3-3新增
         /// </summary>
         /// <param name="dbTypeName"></param>
         /// <param name="raise"></param>
         /// <returns></returns>
-        private static SqlDbType ParseDbType(string dbTypeName, bool raise = true)
-        {
-            switch (dbTypeName.ToLower())
-            {
-                case "bigint": return SqlDbType.BigInt;
-                case "binary": return SqlDbType.Binary;
-                case "bit": return SqlDbType.Bit;
-                case "char": return SqlDbType.Char;
-                case "date": return SqlDbType.Date;
-                case "datetime": return SqlDbType.DateTime;
-                case "datetime2": return SqlDbType.DateTime2;
-                case "datetimeoffset": return SqlDbType.DateTimeOffset;
-                case "numeric":
-                case "decimal": return SqlDbType.Decimal;
-                case "float": return SqlDbType.Float;
-                case "image": return SqlDbType.Image;
-                case "int": return SqlDbType.Int;
-                case "money": return SqlDbType.Money;
-                case "nchar": return SqlDbType.NChar;
-                case "ntext": return SqlDbType.NText;
-                case "nvarchar": return SqlDbType.NVarChar;
-                case "real": return SqlDbType.Real;
-                case "smalldatetime": return SqlDbType.SmallDateTime;
-                case "smallint": return SqlDbType.SmallInt;
-                case "smallmoney": return SqlDbType.SmallMoney;
-                case "structured": return SqlDbType.Structured;
-                case "text": return SqlDbType.Text;
-                case "time": return SqlDbType.Time;
-                case "timestamp": return SqlDbType.Timestamp;
-                case "tinyint": return SqlDbType.TinyInt;
-                case "udt": return SqlDbType.Udt;
-                case "uniqueidentifier": return SqlDbType.UniqueIdentifier;
-                case "varbinary": return SqlDbType.VarBinary;
-                case "varchar": return SqlDbType.VarChar;
-                case "sql_variant":
-                case "variant": return SqlDbType.Variant;
-                case "xml": return SqlDbType.Xml;
-            }
-            if (raise) throw new ArgumentException("SqlDbType not found: " + dbTypeName);
-            return SqlDbType.Variant;
-        }
+        //private static SqlDbType ParseDbType(string dbTypeName, bool raise = true)
+        //{
+        //    switch (dbTypeName.ToLower())
+        //    {
+        //        case "bigint": return SqlDbType.BigInt;
+        //        case "binary": return SqlDbType.Binary;
+        //        case "bit": return SqlDbType.Bit;
+        //        case "char": return SqlDbType.Char;
+        //        case "date": return SqlDbType.Date;
+        //        case "datetime": return SqlDbType.DateTime;
+        //        case "datetime2": return SqlDbType.DateTime2;
+        //        case "datetimeoffset": return SqlDbType.DateTimeOffset;
+        //        case "numeric":
+        //        case "decimal": return SqlDbType.Decimal;
+        //        case "float": return SqlDbType.Float;
+        //        case "image": return SqlDbType.Image;
+        //        case "int": return SqlDbType.Int;
+        //        case "money": return SqlDbType.Money;
+        //        case "nchar": return SqlDbType.NChar;
+        //        case "ntext": return SqlDbType.NText;
+        //        case "nvarchar": return SqlDbType.NVarChar;
+        //        case "real": return SqlDbType.Real;
+        //        case "smalldatetime": return SqlDbType.SmallDateTime;
+        //        case "smallint": return SqlDbType.SmallInt;
+        //        case "smallmoney": return SqlDbType.SmallMoney;
+        //        case "structured": return SqlDbType.Structured;
+        //        case "text": return SqlDbType.Text;
+        //        case "time": return SqlDbType.Time;
+        //        case "timestamp": return SqlDbType.Timestamp;
+        //        case "tinyint": return SqlDbType.TinyInt;
+        //        case "udt": return SqlDbType.Udt;
+        //        case "uniqueidentifier": return SqlDbType.UniqueIdentifier;
+        //        case "varbinary": return SqlDbType.VarBinary;
+        //        case "varchar": return SqlDbType.VarChar;
+        //        case "sql_variant":
+        //        case "variant": return SqlDbType.Variant;
+        //        case "xml": return SqlDbType.Xml;
+        //    }
+        //    if (raise) throw new ArgumentException("SqlDbType not found: " + dbTypeName);
+        //    return SqlDbType.Variant;
+        //}
+        #endregion
 
         #region 添加
         private int _insert<T>(T model, ColumnTypes filter, ReturnTypes returnType)

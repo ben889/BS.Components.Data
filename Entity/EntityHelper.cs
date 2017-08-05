@@ -90,7 +90,7 @@
 
         public static List<string> GetTableColumns(Type type, ColumnTypes filter, string customColumns)
         {
-            string key = type.FullName + "_" + filter.ToString() + "_" + customColumns;
+            //string key = type.FullName + "_" + filter.ToString() + "_" + customColumns;
             List<string> columns = null;// ObjectCache.GetColumns(key);
             if (columns == null)
             {
@@ -112,7 +112,7 @@
                 {
                     forcolumns(type, filter, columns);
                 }
-                ObjectCache.SetColumns(key, columns);
+                //ObjectCache.SetColumns(key, columns);
             }
             return columns;
         }

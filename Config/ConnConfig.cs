@@ -16,7 +16,7 @@ namespace BS.Components.Data.Config
             {
                 //string key = HttpContext.Current.Request.Url.Host;
                 string key = System.Web.HttpContext.Current.Request.Url.Authority;
-                string conn = getConnectionString(key);
+                string conn = getConnStr(key);
                 return conn;
             }
         }
@@ -31,8 +31,8 @@ namespace BS.Components.Data.Config
                 string conn = "";
                 if (System.Web.HttpContext.Current != null)
                 {
-                    string key = System.Web.HttpContext.Current.Request.Url.Authority;
-                    conn = getConnectionString(key);
+                    string domain = System.Web.HttpContext.Current.Request.Url.Authority;
+                    conn = getConnStr(domain);
                 }
                 else {
                     conn = getConnectionString("conn");
@@ -53,7 +53,27 @@ namespace BS.Components.Data.Config
                 string connection = ConfigurationManager.ConnectionStrings["conn"] != null ? ConfigurationManager.ConnectionStrings["conn"].ToString() : "";
                 if (key != null && key.Trim().Length > 0)
                 {
-                    string conn = ConfigurationManager.AppSettings[key] != null ? ConfigurationManager.AppSettings[key].ToString() : "";
+                    connection = ConfigurationManager.ConnectionStrings[key] != null ? ConfigurationManager.ConnectionStrings[key].ToString() : "";
+                }
+                return connection;
+            }
+            catch { }
+            return "";
+        }
+        #region 私有方法
+        /// <summary>
+        /// 根据AppSettings查，如果没有则取默认conn
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static string getConnStr(string AppSettingsKey)
+        {
+            try
+            {
+                string connection = ConfigurationManager.ConnectionStrings["conn"] != null ? ConfigurationManager.ConnectionStrings["conn"].ToString() : "";
+                if (AppSettingsKey != null && AppSettingsKey.Trim().Length > 0)
+                {
+                    string conn = ConfigurationManager.AppSettings[AppSettingsKey] != null ? ConfigurationManager.AppSettings[AppSettingsKey].ToString() : "";
                     if (conn.Length > 0)
                         connection = ConfigurationManager.ConnectionStrings[conn] != null ? ConfigurationManager.ConnectionStrings[conn].ToString() : "";
                 }
@@ -62,5 +82,6 @@ namespace BS.Components.Data.Config
             catch { }
             return "";
         }
+        #endregion
     }
 }
