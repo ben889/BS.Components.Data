@@ -123,6 +123,10 @@ namespace BS.Components.Data.SQLProvider
 
         public int Delete<T>(string where) where T : class
         {
+            return Delete<T>(where, null);
+        }
+        public int Delete<T>(string where, SqlParameter[] parms) where T : class
+        {
             Type type = typeof(T);
             string tableName = EntityHelper.GetTableName(type);
             StringBuilder builder = new StringBuilder();
@@ -133,7 +137,7 @@ namespace BS.Components.Data.SQLProvider
                 builder.Append(" WHERE ");
                 builder.Append(where);
             }
-            return SQLHelper.NonQuery(this.connection, builder.ToString(), CommandType.Text, null);
+            return SQLHelper.NonQuery(this.connection, builder.ToString(), CommandType.Text, parms);
         }
         public int Delete<T>(SqlConnection sqlconnection, SqlCommand command, SqlTransaction trans, string where) where T : class
         {
@@ -214,6 +218,12 @@ namespace BS.Components.Data.SQLProvider
                 sqlText.AppendFormat(" ORDER BY {0}", orderBy);
             }
             return SQLHelper.DataSet(this.connection, sqlText.ToString(), CommandType.Text, parms).Tables[0];
+        }
+
+
+        public DataSet GetDataSet(string sqlText, CommandType commandType, DbParameter[] parms)
+        {
+            return SQLHelper.DataSet(this.connection, sqlText, commandType, parms);
         }
 
         /// <summary>
@@ -481,7 +491,6 @@ namespace BS.Components.Data.SQLProvider
             {
                 where = " WHERE " + where;
             }
-
             if (!string.IsNullOrEmpty(Join))
             {
                 Join = " " + Join;
@@ -506,10 +515,11 @@ namespace BS.Components.Data.SQLProvider
             {
                 builder.Remove(builder.Length - 1, 1);
             }
-            builder.Append(" from ");
+            builder.Append(" FROM ");
             builder.Append(tableName);
             builder.Append(Join);
             builder.Append(where);
+
             builder.Append(string.Concat(new object[] { ") tmp where rownum between ", (currentPage - 1) * pageSize + 1, " and ", currentPage * pageSize }));
             builder.Append(";");
             DataTableCollection tables = SQLHelper.DataSet(this.connection, builder.ToString(), CommandType.Text, parms).Tables;
@@ -565,14 +575,18 @@ namespace BS.Components.Data.SQLProvider
         {
             Type type = typeof(T);
             string tableName = EntityHelper.GetTableName(type);
-            bool quote = false;
-            PropertyInfo tableIdentity = EntityHelper.GetTableIdentity(type);
-            GetDbType(tableIdentity.PropertyType, ref quote);
+            //bool quote = false;
+            //PropertyInfo tableIdentity = EntityHelper.GetTableIdentity(type);
+            //GetDbType(tableIdentity.PropertyType, ref quote);
             StringBuilder builder = new StringBuilder();
-            builder.Append("SELECT COUNT(*) FROM ");
+            builder.Append("SELECT COUNT(1) FROM ");
             builder.Append(tableName);
-            builder.Append(" WHERE ");
-            builder.Append(where);
+            if (where != null && where.Trim().Length > 0)
+            {
+                builder.Append(" WHERE ");
+                builder.Append(where);
+            }
+
             int num = 0;
             SqlDataReader reader = SQLHelper.DataReader(this.connection, builder.ToString(), CommandType.Text, null);
             if (reader.Read())
@@ -726,6 +740,8 @@ namespace BS.Components.Data.SQLProvider
             //    builder.Append(list[0]);
             //    builder.Append(",");
             //}
+
+
             for (index = 0; index < count; index++)
             {
                 builder.Append("@");
@@ -739,8 +755,29 @@ namespace BS.Components.Data.SQLProvider
             SqlParameter[] parms = new SqlParameter[count];
             for (index = 0; index < count; index++)
             {
+
                 property = type.GetProperty(list[index]);
-                parms[index] = new SqlParameter("@" + list[index], GetDbType(property.PropertyType, ref quote));
+                object dbType = null;
+                //得到每一个属性的特性类集合
+                IList<CustomAttributeData> lstAttr = property.GetCustomAttributesData();
+                foreach (var oAttr in lstAttr)
+                {
+                    //得到特性类的所有参数
+                    var lstAttrArgu = oAttr.NamedArguments;
+                    foreach (var oAttrAru in lstAttrArgu)
+                    {
+                        //取每个特性类参数的键值对
+                        //Console.WriteLine(oAttrAru.MemberInfo.Name + "=" + oAttrAru.TypedValue.Value);
+                        if (oAttrAru.MemberInfo.Name.Trim().ToLower().Equals("dbtype"))
+                        {
+                            dbType = oAttrAru.TypedValue.Value;
+                        }
+                    }
+                }
+
+
+                //property = type.GetProperty(list[index]);
+                parms[index] = new SqlParameter("@" + list[index], GetDbType(property.PropertyType, dbType, ref quote));
                 parms[index].Value = property.GetValue(model, null);
             }
             if (((returnType == ReturnTypes.EffectRow) || (returnType == ReturnTypes.Identity)) || (returnType == ReturnTypes.None))

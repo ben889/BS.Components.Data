@@ -38,3 +38,13 @@ E:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.dll
 E:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.pdb
 E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.dll
 E:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.pdb
+D:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.dll
+D:\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.pdb
+D:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.dll
+D:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.pdb
+D:\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.csprojResolveAssemblyReference.cache
+D:\work\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.dll
+D:\work\System\github\BS.Components.Data\bin\Debug\BS.Components.Data.pdb
+D:\work\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.dll
+D:\work\System\github\BS.Components.Data\obj\Debug\BS.Components.Data.pdb
+D:\work\system\github\BS.Components.Data\bin\Debug\MySql.Data.dll

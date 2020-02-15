@@ -60,13 +60,13 @@ namespace BS.Components.Data.Config
             catch { }
             return "";
         }
-        #region 私有方法
+        #region 根据AppSettings查，如果没有则取默认conn
         /// <summary>
         /// 根据AppSettings查，如果没有则取默认conn
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="AppSettingsKey"></param>
         /// <returns></returns>
-        private static string getConnStr(string AppSettingsKey)
+        public static string getConnStr(string AppSettingsKey)
         {
             try
             {

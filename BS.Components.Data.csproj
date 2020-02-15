@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -44,24 +48,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\ConnConfig.cs" />
-    <Compile Include="DataProvider\FileHelper.cs" />
-    <Compile Include="DataProvider\FolderHelper.cs" />
-    <Compile Include="DataProvider\ImageHelper.cs" />
-    <Compile Include="DataProvider\SerializationHelper.cs" />
-    <Compile Include="DataProvider\XmlHelper.cs" />
     <Compile Include="Entity\ColumnTypes.cs" />
     <Compile Include="Entity\EntityHelper.cs" />
     <Compile Include="Entity\MyDbTypeAttribute.cs" />
+    <Compile Include="Entity\MySqlEntityHelper.cs" />
     <Compile Include="Entity\ObjectCache.cs" />
     <Compile Include="Entity\PropertyAttribute.cs" />
     <Compile Include="Entity\ReturnTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLProvider\AccessHelper.cs" />
     <Compile Include="SQLProvider\ISQLFactory.cs" />
+    <Compile Include="SQLProvider\MySqlFactory.cs" />
+    <Compile Include="SQLProvider\MySQLHelper.cs" />
     <Compile Include="SQLProvider\SqlDbHelper.cs" />
     <Compile Include="SQLProvider\SQLFactory.cs" />
     <Compile Include="SQLProvider\SQLHelper.cs" />
     <Compile Include="Util\LogHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\MySql.Data.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

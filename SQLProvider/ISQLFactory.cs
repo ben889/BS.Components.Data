@@ -43,6 +43,7 @@ namespace BS.Components.Data.SQLProvider
         /// <returns></returns>
         int Delete<T>(object keyValue, string customKey) where T : class;
         int Delete<T>(string where) where T : class;
+        int Delete<T>(string where, SqlParameter[] parms) where T : class;
         int Delete<T>(SqlConnection sqlconnection, SqlCommand command, SqlTransaction trans, string where) where T : class;
 
         List<T> GetList<T>(int pageSize, string where, string orderBy, DbParameter[] parms, string customColumns) where T : class;
@@ -50,6 +51,9 @@ namespace BS.Components.Data.SQLProvider
 
         DataTable GetTable(string sqlText, CommandType commandType, DbParameter[] parms);
         DataTable GetTable<T>(int pageSize, string where, string orderBy, DbParameter[] parms, string customColumns) where T : class;
+
+        DataSet GetDataSet(string sqlText, CommandType commandType, DbParameter[] parms);
+        
 
         DataTable GetTablePager<T>(int pageSize, int currentPage, string where, string orderBy, string customColumns, ref int records, DbParameter[] parms) where T : class;
         DataTable GetTablePager(int pageSize, int currentPage, string where, string orderBy, string columns, ref int records, DbParameter[] parms, string tableName, string Join);
